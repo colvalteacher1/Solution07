@@ -1,0 +1,40 @@
+﻿@if (Assignments.Count == 0)
+{
+    <p class="text-muted">Aucun employé affecté à ce projet.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Employé</th>
+                <th>Rôle</th>
+                <th>Date d'affectation</th>
+                <th>Nb compétences</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var a in Assignments)
+            {
+                <tr>
+                    <td>@a.EmployeeName</td>
+                    <td>@a.Role</td>
+                    <td>@a.AssignedDate.ToString("dd/MM/yyyy")</td>
+                    <td>@a.SkillCount</td>
+                    <td class="d-flex gap-1">
+                        <a class="btn btn-sm btn-outline-primary" href="/Home/SkillsByEmployee/@a.EmployeeId">Compétences</a>
+                        <form method="post" action="/Home/RemoveAssignment/@a.Id"
+                              onsubmit="return confirm('Retirer cet employé du projet ?');">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Retirer</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    [Parameter] public List<AssignmentDto> Assignments { get; set; } = new();
+}

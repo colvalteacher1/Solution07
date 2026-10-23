@@ -1,0 +1,20 @@
+﻿@if (Skills.Count == 0)
+{
+    <p class="text-muted">Aucune compétence.</p>
+}
+else
+{
+    <ul class="list-group">
+        @foreach (var s in Skills)
+        {
+            <li class="list-group-item d-flex justify-content-between">
+                <span>@s.Name</span>
+                <span class="badge bg-secondary">@s.Category</span>
+            </li>
+        }
+    </ul>
+}
+
+@code {
+    [Parameter] public List<SkillDto> Skills { get; set; } = new();
+}

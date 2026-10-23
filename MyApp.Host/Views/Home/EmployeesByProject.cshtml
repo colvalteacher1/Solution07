@@ -1,0 +1,14 @@
+﻿@model List<AssignmentDto>
+@{
+    var project = (ProjectDto)ViewBag.Project;
+    ViewData["Title"] = "Employés – " + project.Name;
+}
+
+<h2>Employés affectés au projet « @project.Name »</h2>
+
+<p>
+    <a asp-action="AssignEmployee" asp-route-id="@project.Id" class="btn btn-success">Affecter un employé</a>
+    <a asp-action="Index" class="btn btn-secondary">Retour aux projets</a>
+</p>
+
+<component type="typeof(AssignmentTable)" render-mode="Static" param-Assignments="Model" />

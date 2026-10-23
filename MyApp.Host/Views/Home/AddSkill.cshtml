@@ -1,0 +1,36 @@
+﻿@model AddSkillDto
+@{
+    var employee = (EmployeeDto)ViewBag.Employee;
+    var skills = (SelectList)ViewBag.Skills;
+    ViewData["Title"] = "Ajouter une compétence";
+}
+
+<h2>Ajouter une compétence à @employee.FullName</h2>
+
+@if (!skills.Any())
+{
+    <div class="alert alert-info">Cet employé possède déjà toutes les compétences.</div>
+}
+else
+{
+    <form asp-action="AddSkill" method="post" class="col-md-6">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="EmployeeId" />
+
+        <div class="mb-3">
+            <label asp-for="SkillId" class="form-label"></label>
+            <select asp-for="SkillId" asp-items="skills" class="form-select">
+                <option value="">-- Choisir --</option>
+            </select>
+            <span asp-validation-for="SkillId" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+    </form>
+}
+
+<a asp-action="SkillsByEmployee" asp-route-id="@employee.Id" class="btn btn-secondary mt-3">Retour</a>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

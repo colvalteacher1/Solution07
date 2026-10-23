@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="MyApp.Data/MyApp.Data.csproj" />
+  <Project Path="MyApp.Host/MyApp.Host.csproj" />
+  <Project Path="MyApp.Shared/MyApp.Shared.csproj" />
+  <Project Path="MyApp.UI/MyApp.UI.csproj" />
+</Solution>

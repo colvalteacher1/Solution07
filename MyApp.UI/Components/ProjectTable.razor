@@ -1,0 +1,30 @@
+﻿<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Projet</th>
+            <th>Description</th>
+            <th>Début</th>
+            <th>Nb employés</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Projects)
+        {
+            <tr>
+                <td>@p.Name</td>
+                <td>@p.Description</td>
+                <td>@p.StartDate.ToString("dd/MM/yyyy")</td>
+                <td><span class="badge bg-primary">@p.EmployeeCount</span></td>
+                <td>
+                    <a class="btn btn-sm btn-outline-primary" href="/Home/EmployeesByProject/@p.Id">Employés</a>
+                    <a class="btn btn-sm btn-outline-success" href="/Home/AssignEmployee/@p.Id">Affecter</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    [Parameter] public List<ProjectDto> Projects { get; set; } = new();
+}

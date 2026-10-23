@@ -1,0 +1,42 @@
+﻿@model AssignEmployeeDto
+@{
+    var project = (ProjectDto)ViewBag.Project;
+    var employees = (SelectList)ViewBag.Employees;
+    ViewData["Title"] = "Affecter un employé";
+}
+
+<h2>Affecter un employé au projet « @project.Name »</h2>
+
+@if (!employees.Any())
+{
+    <div class="alert alert-info">Tous les employés sont déjà affectés à ce projet.</div>
+}
+else
+{
+    <form asp-action="AssignEmployee" method="post" class="col-md-6">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="ProjectId" />
+
+        <div class="mb-3">
+            <label asp-for="EmployeeId" class="form-label"></label>
+            <select asp-for="EmployeeId" asp-items="employees" class="form-select">
+                <option value="">-- Choisir --</option>
+            </select>
+            <span asp-validation-for="EmployeeId" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Role" class="form-label"></label>
+            <input asp-for="Role" class="form-control" placeholder="ex. Développeur" />
+            <span asp-validation-for="Role" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Affecter</button>
+    </form>
+}
+
+<a asp-action="EmployeesByProject" asp-route-id="@project.Id" class="btn btn-secondary mt-3">Retour</a>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

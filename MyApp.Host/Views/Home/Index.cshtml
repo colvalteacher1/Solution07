@@ -1,0 +1,6 @@
+﻿@model List<ProjectDto>
+@{ ViewData["Title"] = "Projets"; }
+
+<h2>Liste des projets</h2>
+
+<component type="typeof(ProjectTable)" render-mode="Static" param-Projects="Model" />
