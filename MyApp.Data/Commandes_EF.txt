@@ -1,0 +1,4 @@
+Exécuter dans "Developer PowerShell" les 2 commandes suivantes:
+
+dotnet ef migrations add InitialModelWithData --project MyApp.Data --startup-project MyApp.Host
+dotnet ef database update --project MyApp.Data --startup-project MyApp.Host
